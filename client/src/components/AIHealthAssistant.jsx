@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-
+import API_BASE_URL from "../config/api.js";
 function AIHealthAssistant() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -369,7 +369,7 @@ function AIHealthAssistant() {
         import.meta.env.VITE_API_URL || "http://localhost:5000"
       ).replace(/\/+$/, "");
 
-      const response = await fetch(`${API_URL}/api/ai/chat`, {
+      const response = await fetch(`${API_BASE_URL}/ai/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

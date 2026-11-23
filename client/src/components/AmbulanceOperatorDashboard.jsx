@@ -2,8 +2,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-
-const API_URL = "http://localhost:5000/api/ambulance";
+import API_BASE_URL from "../config/api.js"; // Supports both local development and live deployment.
+const API_URL = `${API_BASE_URL}/ambulance`;
 
 // Leaflet map marker.
 const markerIcon = new L.Icon({

@@ -4,7 +4,8 @@ import PatientAppointments from "./PatientAppointments.jsx";
 import VideoConsultation from "./VideoConsultation.jsx";
 import AmbulanceOperatorDashboard from "./AmbulanceOperatorDashboard.jsx";
 import PharmacyDashboard from "./PharmacyDashboard.jsx";
-
+// API URL: local development and live deployment support.
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 // Role-specific dashboard information and navigation.
 const roleDashboard = {
   patient: {
@@ -267,7 +268,7 @@ function Dashboard() {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:5000/api/users/profile", {
+      const response = await fetch(`${API_URL}/users/profile`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -295,12 +296,9 @@ function Dashboard() {
     setStatsError("");
 
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/users/admin/stats",
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        },
-      );
+      const response = await fetch(`${API_URL}/users/admin/stats`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       const data = await response.json();
 
@@ -325,12 +323,9 @@ function Dashboard() {
     setUsersError("");
 
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/users/admin/users",
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        },
-      );
+      const response = await fetch(`${API_URL}/users/admin/users`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       const data = await response.json();
 
@@ -355,12 +350,9 @@ function Dashboard() {
     setAppointmentsError("");
 
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/appointments/doctor",
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        },
-      );
+      const response = await fetch(`${API_URL}/appointments/doctor`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       const data = await response.json();
 
@@ -387,7 +379,7 @@ function Dashboard() {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/appointments/${appointmentId}/status`,
+        `${API_URL}/appointments/${appointmentId}/status`,
         {
           method: "PATCH",
           headers: {
@@ -481,7 +473,7 @@ function Dashboard() {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/users/admin/users/${editingUser._id}`,
+        `${API_URL}/users/admin/users/${editingUser._id}`,
         {
           method: "PUT",
           headers: {
@@ -534,7 +526,7 @@ function Dashboard() {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/users/admin/users/${registeredUser._id}/status`,
+        `${API_URL}/users/admin/users/${registeredUser._id}/status`,
         {
           method: "PATCH",
           headers: {

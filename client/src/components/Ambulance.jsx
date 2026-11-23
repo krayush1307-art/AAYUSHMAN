@@ -8,7 +8,7 @@ import {
 } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-
+import API_BASE_URL from "../config/api.js";
 const markerIcon = new L.Icon({
   iconUrl: new URL("leaflet/dist/images/marker-icon.png", import.meta.url).href,
   iconRetinaUrl: new URL(
@@ -22,8 +22,7 @@ const markerIcon = new L.Icon({
   popupAnchor: [1, -34],
   shadowSize: [41, 41],
 });
-
-const API_URL = "http://localhost:5000/api/ambulance";
+const API_URL = `${API_BASE_URL}/ambulance`;
 const DEFAULT_CENTER = [25.5941, 85.1376];
 
 function getToken() {

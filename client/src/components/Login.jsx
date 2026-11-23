@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const API_URL = "http://localhost:5000/api/auth";
+import API_BASE_URL from "../config/api.js";
 
+const API_URL = `${API_BASE_URL}/auth`;
 function Login() {
   const navigate = useNavigate();
 

@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-
-const API_URL = "http://localhost:5000/api/pharmacy";
-
+// Supports local development and live deployment.
+const API_URL = `${API_BASE_URL}/pharmacy`;
+import API_BASE_URL from "../config/api.js";
 function getStoredUser() {
   try {
     return JSON.parse(localStorage.getItem("aayushman-user") || "null");

@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import API_BASE_URL from "../config/api.js";
 
-const API_URL = "http://localhost:5000/api";
+const API_URL = API_BASE_URL;
 
 function Doctors() {
   const [doctors, setDoctors] = useState([]);

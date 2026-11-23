@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import VideoConsultation from "./VideoConsultation.jsx";
-
+import API_BASE_URL from "../config/api.js";
 function PatientAppointments() {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -27,15 +27,12 @@ function PatientAppointments() {
         return;
       }
 
-      const response = await fetch(
-        "http://localhost:5000/api/appointments/patient",
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      const response = await fetch(`${API_BASE_URL}/appointments/patient`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      );
+      });
 
       const data = await response.json();
 
@@ -104,8 +101,6 @@ function PatientAppointments() {
       id="patient-appointments"
       className="mt-8 rounded-2xl border border-blue-100 bg-gradient-to-br from-[#F5F9FE] via-[#EAF4FC] to-[#DCEBFA] p-5 shadow-sm transition-colors duration-300 sm:p-7 dark:!border-[#3C4942] dark:!bg-gradient-to-br dark:!from-[#242C29] dark:!via-[#293831] dark:!to-[#30483A]"
     >
-
-      
       {/* Section heading and refresh button */}
       <div className="mb-7 flex flex-wrap items-center justify-between gap-4">
         <div>

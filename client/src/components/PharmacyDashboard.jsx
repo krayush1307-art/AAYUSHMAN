@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
-
-const API_URL = "http://localhost:5000/api/pharmacy";
-
+// Supports both local development and live deployment.
+const API_URL = `${API_BASE_URL}/pharmacy`;
+import API_BASE_URL from "../config/api.js";
 const emptyForm = {
   name: "",
   category: "",

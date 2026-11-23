@@ -10,17 +10,29 @@ import aiRoutes from "./routes/aiRoutes.js";
 import ambulanceRoutes from "./routes/ambulanceRoutes.js";
 import pharmacyRoutes from "./routes/pharmacyRoutes.js";
 
-// Load environment variables from .env
+// Load environment variables
 dotenv.config();
 
-// Create Express application
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Allow requests from React frontend
+// Allow local development and deployed frontend URLs.
+// Add your Vercel URL to FRONTEND_URL on Render later.
+const allowedOrigins = (process.env.FRONTEND_URL || "http://localhost:5173")
+  .split(",")
+  .map((url) => url.trim())
+  .filter(Boolean);
+
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: (origin, callback) => {
+      // Allow requests without an origin (e.g. health checks).
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("Not allowed by CORS"));
+    },
   }),
 );
 
@@ -53,7 +65,7 @@ app.use("/api/users", userRoutes);
 // Appointment routes
 app.use("/api/appointments", appointmentRoutes);
 
-// Cloudflare AI Health Assistant routes
+// AI Health Assistant routes
 app.use("/api/ai", aiRoutes);
 
 // Ambulance booking and tracking routes
@@ -66,11 +78,11 @@ app.use("/api/pharmacy", pharmacyRoutes);
 const startServer = async () => {
   try {
     if (!process.env.MONGO_URI) {
-      throw new Error("MONGO_URI is missing from the .env file");
+      throw new Error("MONGO_URI is missing");
     }
 
     if (!process.env.JWT_SECRET) {
-      throw new Error("JWT_SECRET is missing from the .env file");
+      throw new Error("JWT_SECRET is missing");
     }
 
     await mongoose.connect(process.env.MONGO_URI);
@@ -78,10 +90,10 @@ const startServer = async () => {
     console.log("MongoDB connected successfully!");
 
     app.listen(PORT, () => {
-      console.log(`AAYUSHMAN server running at http://localhost:${PORT}`);
+      console.log(`AAYUSHMAN server running on port ${PORT}`);
     });
   } catch (error) {
-    console.error("Database connection failed:", error.message);
+    console.error("Server startup failed:", error.message);
     process.exit(1);
   }
 };
