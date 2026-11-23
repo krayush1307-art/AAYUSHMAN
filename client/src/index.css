@@ -1,0 +1,266 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* =========================================
+   AAYUSHMAN GLOBAL THEME SYSTEM
+   Light theme remains unchanged.
+========================================= */
+
+:root {
+  color-scheme: light;
+}
+
+/* Final Charcoal + Green Dark Theme */
+.dark {
+  color-scheme: dark;
+
+  /* Main backgrounds */
+  --app-bg: #171c1b;
+  --app-bg-secondary: #1e2522;
+
+  /* Cards and surfaces */
+  --app-card: #242c29;
+  --app-card-hover: #303c36;
+  --app-card-secondary: #303c36;
+
+  /* Borders */
+  --app-border: #3c4942;
+
+  /* Typography */
+  --app-heading: #f5f7f5;
+  --app-text: #d0dad3;
+  --app-muted: #a0aea5;
+
+  /* Green accent */
+  --app-primary: #39b982;
+  --app-primary-hover: #55cd96;
+  --app-primary-soft: rgba(57, 185, 130, 0.13);
+
+  /* Status colors */
+  --app-success: #39b982;
+  --app-danger: #f07878;
+  --app-warning: #eabf67;
+
+  /* Shadows */
+  --app-shadow: 0 12px 35px rgba(0, 0, 0, 0.22);
+}
+
+/* =========================================
+   GLOBAL PAGE BEHAVIOUR
+========================================= */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+section[id] {
+  scroll-margin-top: 90px;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+/* Global dark background */
+.dark body {
+  background-color: var(--app-bg);
+  color: var(--app-text);
+}
+
+/* =========================================
+   REUSABLE DARK THEME CLASSES
+========================================= */
+
+.dark-theme-page {
+  background-color: var(--app-bg);
+  color: var(--app-text);
+}
+
+.dark-theme-section {
+  background-color: var(--app-bg-secondary);
+  color: var(--app-text);
+}
+
+.dark-theme-card {
+  background-color: var(--app-card);
+  border-color: var(--app-border);
+  color: var(--app-text);
+  box-shadow: var(--app-shadow);
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.dark-theme-card:hover {
+  background-color: var(--app-card-hover);
+}
+
+.dark-theme-heading {
+  color: var(--app-heading);
+}
+
+.dark-theme-muted {
+  color: var(--app-muted);
+}
+
+.dark-theme-accent {
+  color: var(--app-primary);
+}
+
+.dark-theme-accent-bg {
+  background-color: var(--app-primary-soft);
+}
+
+.dark-theme-border {
+  border-color: var(--app-border);
+}
+
+.dark-theme-button {
+  background-color: var(--app-primary);
+  color: #10251b;
+  transition: background-color 0.2s ease;
+}
+
+.dark-theme-button:hover {
+  background-color: var(--app-primary-hover);
+}
+
+/* =========================================
+   ACCESSIBILITY & INTERACTIONS
+========================================= */
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dark ::selection {
+  background-color: var(--app-primary);
+  color: #10251b;
+}
+
+/* Respect accessibility preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* =========================================
+   AAYUSHMAN DASHBOARD - DARK THEME OVERRIDES
+   Light theme remains unchanged.
+========================================= */
+
+.dark #dashboard {
+  background-color: #171c1b !important;
+  color: #d0dad3;
+}
+
+/* Dashboard cards and panels */
+.dark #dashboard [class*="dark:bg-[#183B56]"],
+.dark #dashboard [class*="dark:bg-[#234E70]"] {
+  background-color: #242c29 !important;
+}
+
+.dark #dashboard [class*="dark:bg-[#356589]"] {
+  background-color: #303c36 !important;
+}
+
+/* Borders */
+.dark #dashboard [class*="dark:border-[#356589]"] {
+  border-color: #3c4942 !important;
+}
+
+/* Headings */
+.dark #dashboard [class*="dark:text-[#EAF4FA]"],
+.dark #dashboard [class*="dark:text-white"] {
+  color: #f5f7f5 !important;
+}
+
+/* Regular and muted text */
+.dark #dashboard [class*="dark:text-slate-300"] {
+  color: #d0dad3 !important;
+}
+
+.dark #dashboard [class*="dark:text-slate-400"] {
+  color: #a0aea5 !important;
+}
+
+/* Green accents */
+.dark #dashboard [class*="dark:text-[#00C2D1]"],
+.dark #dashboard [class*="dark:group-hover:text-cyan-300"] {
+  color: #39b982 !important;
+}
+
+.dark #dashboard [class*="dark:bg-[#00C2D1]"] {
+  background-color: #39b982 !important;
+  color: #10251b !important;
+}
+
+.dark #dashboard [class*="dark:hover:bg-cyan-300"]:hover {
+  background-color: #55cd96 !important;
+}
+
+/* Inputs and dropdowns */
+.dark #dashboard input,
+.dark #dashboard select,
+.dark #dashboard textarea {
+  background-color: #242c29;
+  color: #f5f7f5;
+  border-color: #3c4942;
+}
+
+.dark #dashboard input::placeholder {
+  color: #a0aea5;
+}
+
+.dark #dashboard input:focus,
+.dark #dashboard select:focus,
+.dark #dashboard textarea:focus {
+  border-color: #39b982;
+  outline-color: #39b982;
+}
+
+/* Tables */
+.dark #dashboard table thead {
+  background-color: #303c36;
+}
+
+.dark #dashboard table tbody tr:hover {
+  background-color: rgba(57, 185, 130, 0.06);
+}
+
+/* Smooth transitions */
+#dashboard [class*="rounded-2xl"],
+#dashboard button,
+#dashboard input,
+#dashboard select {
+  transition-property: background-color, border-color, color, box-shadow;
+  transition-duration: 250ms;
+}
+/* Hero background: white to soft blue */
+.hero-light-gradient {
+  background: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    #f4fbff 35%,
+    #dff3ff 70%,
+    #b9e5ff 100%
+  );
+}
